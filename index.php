@@ -21,11 +21,12 @@
   </head>
   <body>
     <?php
-    
+    require('./Form.php');
+
     $formulaire = new Form($_GET);
 
     ?>
-    <div class="preloader">
+    <div class="preloader loaded">
       <div class="preloader-body">
         <div class="cssload-container">
           <div class="cssload-speeding-wheel"></div>
@@ -1161,23 +1162,41 @@
             <div class="col-md-10 col-lg-9 col-xl-7">
               <div class="section-50 section-md-75 section-xl-100">
                 <h3>Free Consultation</h3>
+                  <?php
+                    if(isset($_GET['name']) && isset($_GET['num']) && isset($_GET['email'])){
+
+                      echo "Votre nom est ".$_GET['name']." \n";
+                      echo "Votre numéro de télephone est ".$_GET['num']." \n";
+                      echo "Votre email est ".$_GET['email'];
+                                
+                    }else{
+                        echo("Veuillez entrer vos identifiants");
+                    }
+
+                  ?>
                 <form
                   class="rd-mailform"
                   data-form-output="form-output-global"
                   data-form-type="contact"
-                  method="post"
-                  action="bat/rd-mailform.php"
+                  method="get"
+                  action="#"
                 >
                   <div class="row row-30">
                     <div class="col-md-6">
                       <div class="form-wrap">
-                        <input
-                          class="form-input"
-                          id="request-form-name"
-                          type="text"
-                          name="name"
-                          data-constraints="@Required"
-                        />
+                      <?php  
+
+                        $formulaire->createImputText('name','form-input request-form-name ');
+                                     
+                         if(isset($_GET['name'])){
+
+                            echo ('');
+                                      
+                          }else{
+                              echo("Veuillez entrer votre nom");
+                          }
+                      ?>
+                      
                         <label class="form-label" for="request-form-name"
                           >Name</label
                         >
@@ -1185,13 +1204,21 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-wrap">
-                        <input
-                          class="form-input"
-                          id="request-form-phone"
-                          type="text"
-                          name="phone"
-                          data-constraints="@Numeric @Required"
-                        />
+
+                      <?php  
+
+                        $formulaire->createImputNum('num','form-input request-form-phone ');
+
+                        if(isset($_GET['num'])){
+
+                          echo ('');
+                                    
+                        }else{
+                            echo("Veuillez entrer votre numéro de télephone");
+                        }
+                                              
+                      ?>
+                                          
                         <label class="form-label" for="request-form-phone"
                           >Phone</label
                         >
@@ -1199,13 +1226,21 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-wrap">
-                        <input
-                          class="form-input"
-                          id="request-form-email"
-                          type="email"
-                          name="email"
-                          data-constraints="@Email @Required"
-                        />
+
+                      <?php  
+
+                        $formulaire->createImputEmail('email','form-input request-form-email ');
+                          
+                        if(isset($_GET['email'])){
+
+                          echo ('');
+                                    
+                        }else{
+                            echo("Veuillez entrer votre email");
+                        }
+
+                      ?>
+                                             
                         <label class="form-label" for="request-form-email"
                           >Email</label
                         >
@@ -1244,12 +1279,12 @@
                     <div class="col-12">
                       <div class="row">
                         <div class="col-md-6">
-                          <button
-                            class="button button-block button-primary"
-                            type="submit"
-                          >
-                            Request a Free Consultation
-                          </button>
+                          <?php
+
+                        $formulaire->createSubmit('Request a Free Consultation','button button-block button-primary')
+
+                        ?>
+                          
                         </div>
                       </div>
                     </div>
@@ -1621,6 +1656,6 @@
     </div>
     <div class="snackbars" id="form-output-global"></div>
     <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
   </body>
 </html>

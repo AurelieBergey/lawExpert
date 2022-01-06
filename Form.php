@@ -24,10 +24,20 @@ class Form{
             }
         }
 
-        public function createImput($key,$class){
+        public function createImputText($key,$class){
             // echo '<label for="'. $key.'">'.$key.'</label>';
             echo '<input type="text" class="' .$class. '"    name="' .$key. '" value="' .$this->getValue($key) . '">'; 
         }
+        public function createImputEmail($key,$class){
+            // echo '<label for="'. $key.'">'.$key.'</label>';
+            echo '<input type="email" class="' .$class. '"    name="' .$key. '" value="' .$this->getValue($key) . '">'; 
+        }
+        public function createImputNum($key,$class){
+            // echo '<label for="'. $key.'">'.$key.'</label>';
+            echo '<input type="numbers" class="' .$class. '"    name="' .$key. '" value="' .$this->getValue($key) . '">'; 
+        }
+
+            
 
         public function createSubmit($text,$class){
             echo '<button type="submit" class="' .$class. '" >'.$text.'</button>';
